@@ -1,19 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
+
 import 'package:fluttertruefalse/domain/domain/todo.dart';
 
-abstract class TodoState {}
+// enum wise and equatable and props meaning
 
-class TodoInitial extends TodoState {}
+enum TodoStatus { initial, loading, loaded, error }
 
-class TodoLoading extends TodoState {}
-
-class TodoLoaded extends TodoState {
+class TodoState extends Equatable {
+  final TodoStatus status;
   final List<Todo> todos;
-
-  TodoLoaded(this.todos);
-}
-
-class TodoMsz extends TodoState {
   final String msz;
+  const TodoState({
+    this.status = TodoStatus.initial,
+    this.todos = const [],
+    this.msz = "",
+  });
 
-  TodoMsz(this.msz);
+  TodoState copyWith({TodoStatus? status, List<Todo>? todos, String? msz}) {
+    return TodoState(
+      status: status ?? this.status,
+      todos: todos ?? this.todos,
+      msz: msz ?? this.msz,
+    );
+  }
+
+  @override
+  List<Object?> get props => [status, todos, msz];
 }

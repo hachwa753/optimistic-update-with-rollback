@@ -14,10 +14,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<TodoBloc, TodoState>(
         builder: (context, state) {
-          if (state is TodoLoading) {
+          if (state.status == TodoStatus.loading) {
             return Center(child: CircularProgressIndicator());
           }
-          if (state is TodoLoaded) {
+          if (state.status == TodoStatus.error) {
+            return Center(child: Text(state.msz));
+          }
+          if (state.status == TodoStatus.loaded) {
             if (state.todos.isEmpty) {
               return Center(child: Text("api not loaded"));
             }

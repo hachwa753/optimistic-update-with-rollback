@@ -13,7 +13,7 @@ class DetailPage extends StatelessWidget {
     final todoProvider = context.read<TodoBloc>();
     return BlocBuilder<TodoBloc, TodoState>(
       builder: (context, state) {
-        if (state is TodoLoaded) {
+        if (state.status == TodoStatus.loaded) {
           final todo = state.todos.firstWhere((e) => e.id == id);
 
           return Scaffold(

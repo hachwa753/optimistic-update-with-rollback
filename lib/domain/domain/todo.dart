@@ -1,4 +1,6 @@
-class Todo {
+import 'package:equatable/equatable.dart';
+
+class Todo extends Equatable {
   final int id;
   final String title;
   final bool completed;
@@ -24,4 +26,7 @@ class Todo {
       completed: map['completed'] as bool,
     );
   }
+
+  @override
+  List<Object?> get props => [id, title, completed];
 }
